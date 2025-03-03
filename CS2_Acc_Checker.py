@@ -43,16 +43,11 @@ def open_links(urls, site):
             st.warning(f"SteamID не найден для {url}")
 
     if steamids:
-        if site == "all":
-            for steamid in steamids:
+        for steamid in steamids:
+            if site in ["all", "faceitanalyser"]:
                 webbrowser.open(f"https://faceitanalyser.com/stats/{steamid}/cs2")
+            if site in ["all", "csstats"]:
                 webbrowser.open(f"https://csstats.gg/player/{steamid}")
-        elif site == "csstats":
-            for steamid in steamids:
-                webbrowser.open(f"https://csstats.gg/player/{steamid}")
-        elif site == "faceitanalyser":
-            for steamid in steamids:
-                webbrowser.open(f"https://faceitanalyser.com/stats/{steamid}/cs2")
 
 def main():
     st.title("CS2 Acc Checker")
@@ -74,10 +69,6 @@ def main():
     with col3:
         if st.button("FaceitAnalyzer", use_container_width=True):
             open_links(urls, "faceitanalyser")
-
-    if st.button("Очистить", use_container_width=True):
-        st.experimental_rerun()
-
 
 if __name__ == "__main__":
     main()
